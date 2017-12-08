@@ -8,6 +8,7 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import Authentication
+from selenium.webdriver.chrome.options import Options
 from Notification import notify_event,success_notification,no_birthday_today
 import xpaths
 import base64 
@@ -34,19 +35,25 @@ def Wish_Birthdays(driver):
 			no_birthday_today().show()
 			return
 
-		for birthday in wishes:
-			birthday.send_keys("Happy Birthday :-) ")
-			#birthday.send_keys(Keys.ENTER)	
-		success_notification().show()
-		time.sleep(5)
-		driver.quit()
+		try:			
+			for birthday in wishes:
+				birthday.send_keys("Happy Belated Birthday :-) ")
+				birthday.send_keys(Keys.ENTER)	
+			success_notification().show()
+			time.sleep(5)
+			driver.quit()
+		except:
+ 			BaseException("Could not decode the response from the Server")				
 
 #main function that drives the Birthday
 def main():
 	notify_event().show()
-	driver = webdriver.Chrome()
-	driver.set_window_position(-2000, 0)
+	chrome_options = Options()
+	chrome_options.add_argument("--headless")
+	chrome_options.add_argument("--window-size=1920x1080")
+	driver = webdriver.Chrome(chrome_options = chrome_options,executable_path="/home/geekowl/Desktop/chromedriver")
 	driver.get(Event_Url)
+	
 	login(driver)
 
 if __name__ == '__main__':
