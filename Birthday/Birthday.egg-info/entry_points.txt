@@ -1,0 +1,3 @@
+[console_scripts]
+Wish = FaceBir.Happy:main
+

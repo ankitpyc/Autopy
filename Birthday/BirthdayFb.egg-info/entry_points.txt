@@ -1,0 +1,4 @@
+[console_scripts]
+FbWish = FaceBir.Happy:main
+FbWishSettings = FaceBir.UpdateCred:Update
+

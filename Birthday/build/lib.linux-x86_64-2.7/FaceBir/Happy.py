@@ -1,5 +1,4 @@
-#!/usr/bin/python
-
+#!/usr/bin/env python
 import os
 from Facebook_Creds import Event_Url,App_Name
 import urllib	
@@ -17,13 +16,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 def login(driver):
 	email = driver.find_element_by_xpath(xpaths.creds["input_login"])
 	email.send_keys(base64.b64decode(Authentication.Facebook_User_Id))
-	print("Email Id entered...")
+	#print("Email Id entered...")
 	password = driver.find_element_by_xpath(xpaths.creds["input_password"])
 	password.send_keys(base64.b64decode(Authentication.Facebook_Password))
-	print("Password entered...")
+	#print("Password entered...")
 	button = driver.find_element_by_xpath(xpaths.creds["button_login"])
 	button.click()
-	print "Logged into Facebook"
+	#print "Logged into Facebook"
 	Wish_Birthdays(driver)
 
 ## gets all the friends whose birthday is today and 
@@ -49,12 +48,9 @@ def Wish_Birthdays(driver):
 def main():
 	notify_event().show()
 	chrome_options = Options()
-	chrome_options.add_argument("--headless")
+	#chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--window-size=1920x1080")
 	driver = webdriver.Chrome(chrome_options = chrome_options,executable_path="/home/geekowl/Desktop/chromedriver")
 	driver.get(Event_Url)
 	
 	login(driver)
-
-if __name__ == '__main__':
-	main()
